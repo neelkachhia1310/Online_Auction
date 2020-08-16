@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+Hello from histroy
+<meta http-equiv="refresh" content="5">
+
+{% block content %}
+
+ <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Base Price</th>
+        <th>Selling Price</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Sell Customer Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in s %}
+      <tr>
+        <td>{{p.title}}</td>
+        <td>{{p.author}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.product_category}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_customer_name}}</td>
+        
+        
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

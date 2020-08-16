@@ -1,0 +1,110 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<style>
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<meta http-equiv="refresh" content="25">
+
+
+    {% for post in posts %}
+       <div class="responsive">
+    <div class="gallery">
+      <img src="{{ post.image.url }}" alt="Online Auction"  class="img-thumbnail" height="200" width="300">
+    
+    <div class="media-body">
+      <!--  <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a> -->
+
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2> 
+            <a href="/post/live_auc?num1={{post.id}}">
+        <button type="button" class="btn btn-info active">
+                {% if user.is_authenticated %}
+                Go To Live Auction
+                {% else %}
+                Watch Auction        
+        </button>
+        </a>
+                 {% endif %}
+        
+    </div> 
+          
+  </div>
+</div>
+
+
+<!--
+
+         <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" width="42" height="42"> 
+-->
+          
+    {% endfor %}
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<footer>
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+    </footer>
+{% endblock content %}

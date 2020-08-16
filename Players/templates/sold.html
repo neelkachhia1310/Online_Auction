@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+<h1 color='red'> Auction Completed </h1>
+<h1>Player Name :-  {{s.player_name}} </h1>
+<br>
+       
+
+ <table style="width:50%">
+  <tr>
+    
+  </tr>
+  
+  
+  <tr>
+    <td rowspan="10">
+      <img src="{{ s.image.url }}" alt="Online Auction"  height="350" width="600">
+    </td>
+    <td> 
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>   
+            <br>
+            Base Price {{ s.base_price}}
+            <br>
+            Raising Price {{ s.raising_price}}
+            <br>
+            Selling Team Name :=  {{ s.sell_teamName }}
+            <br>
+            Selling Price {{ s.sell_price}}
+            
+                 
+    </td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td>
+    </td>
+  </tr>
+</table>
+
+        
+{% endblock %}

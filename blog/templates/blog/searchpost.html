@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% load bootstrap%}
+{% block content %}
+
+<form method="GET" action="">
+{{ filter.form|bootstrap}}
+
+<button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+    {% for pla in filter.qs %}
+    ----------------------------------------------------------------<br>
+        <article class="media content-section">
+          <div class="media-body">
+            
+            <p> Title = {{ pla.title }}
+            <br>
+           Author ={{ pla.author }}
+           <br>
+            Base Price={{pla.base_price}}<br>Sell Price={{pla.sell_price}}
+            </p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

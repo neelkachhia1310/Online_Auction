@@ -1,0 +1,132 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<style>
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+<h1>My Purchased Auction Items</h1>
+<table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Owner</th>
+        <th>Base Price</th>
+        <th>Selling Price</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Sell Customer Name</th>
+        <th>Payment Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in  posts %}
+      <tr>
+        <td>{{p.title}}</td>
+        <td>{{p.author}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.product_category}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_customer_name}}</td>
+        <td>{{p.payment_status}}</td>
+       <td> {% if p.payment_status == "incomplete" %}
+       <a href='/post/product_payment?num1={{p.id}}'> <button>Click Here To Pay</button></a>
+        {% endif %}
+        </td>
+        
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+   <!-- {% for post in posts %}
+       <div class="responsive">
+    <div class="gallery">
+      <img src="{{ post.image.url }}" alt="Online Auction"  class="img-thumbnail">
+    
+    <div class="media-body">-->
+      <!--  <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a> 
+
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2> -->
+
+    </div> 
+          
+  </div>
+</div>
+
+
+<!--
+
+         <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" width="42" height="42"> 
+-->
+          
+<!--    {% endfor %} -->
+
+<footer>
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+    </footer>
+{% endblock content %}

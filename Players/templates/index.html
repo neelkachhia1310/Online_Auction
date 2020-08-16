@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+<h1>Players List</h1>
+
+<meta http-equiv="refresh" content="25">
+
+
+  <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Role</th>
+        <th>BasePrice</th>
+        <th>Status</th>
+        <th>SellPrice</th>
+        <th>Sell TeamName</th>
+        <th>  </th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in pla %}
+      <tr>
+        <td>{{p.player_name}}</td>
+        <td>{{p.player_country}}</td>
+        <td>{{p.player_role}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.sell_teamName}}</td>
+        <td>
+        
+  <a href="/player/details?num1={{p.player_name}}">
+        <button type="button">
+                {% if user.is_authenticated %}
+                Go To Live Auction
+                {% else %}
+        Watch Auction
+        
+        </button>
+        </a>
+         {% endif %}
+        
+
+        </td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

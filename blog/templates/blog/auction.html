@@ -1,0 +1,143 @@
+{% extends "blog/base.html" %}
+
+    {% block content %}
+
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js">
+</script>
+
+<script>
+var today, someday;
+today = new Date();
+someday = new Date();
+someday.setMinutes(today.getMinutes()+2);
+
+
+var countDownDate = new Date("{{s.date}} {{s.hour}}:{{s.minite}}:{{s.second}}").getTime();
+var x = setInterval(function() {
+
+
+  var now = new Date().getTime();
+
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  if (distance <= 0) {
+    clearInterval(x);
+    document.getElementById("b1").disabled=true;
+    document.getElementById("demo").innerHTML="Expired";
+
+    location.replace("/post/sold?num1={{s.id}}&do=yes")
+
+  }
+}, 1000);
+</script>
+
+<!--
+  <meta http-equiv="refresh" content="1"/>
+-->
+<br>
+
+ 
+{% if user.is_authenticated %}
+ <meta http-equiv="refresh" content="5; URL=/post/live_auction?num1={{s.id}}&inc=no">
+ {% else %}
+ <meta http-equiv="refresh" content="5; URL=/post/live_auc?num1={{s.id}}&inc=no">
+
+ {% endif %}
+
+<!--
+<script>
+    $(document).ready(
+            function() {
+
+
+                setInterval(function() {
+                    var randomnumber = Math.floor(Math.random() * 100);
+                  {% if reload == "yes" %}                       
+                              myFunction2();                       
+                  {% endif %}
+                    
+                }, 1000);
+            });
+</script>
+ -->   
+
+ <table style="width:50%">
+  <tr>
+    <th> Owner   <img class="rounded-circle article-img" src="{{ s.author.profile.image.url }}" width="42" height="42"> 
+    
+        <a class="mr-2" href="#">{{ s.author }}</a>
+    </th> 
+  </tr>
+  
+  
+  <tr>
+    <td rowspan="10">
+      <img src="{{ s.image.url }}" alt="Online Auction"  height="350" width="600">
+    </td>
+    <td>      <h2 class="article-title">Title</h2>{{ s.title }}
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>   <br> Description<br>{{ s.content }}
+            <br>
+            Base Price {{ s.base_price}}
+            <br>
+            Raising Price {{ s.raising_price}}
+            <br>
+            Selling Customer Name :=  {{ s.sell_customer_name }}
+            <br>
+            Selling Price {{ s.sell_price}}
+            
+                 
+    </td>
+  </tr>
+  <tr>
+      <td>
+        Time Reamaning<div id="show">
+        <p id="demo"></p>
+      </td>
+  </tr>
+  <tr>
+    <td>
+    {% if user.is_authenticated %}
+      <button id="b1" onclick="myFunction()" class="btn btn-success" >Raise Price</button>
+    {% else %}
+      <button id="b1" onclick="myFunction()" hidden>Raise Price</button>
+    {% endif %}
+
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+  
+  <button id="b2" hidden onclick="myFunction2()" >Reload  Price</button>
+           
+
+<script>
+function myFunction() {
+  location.replace("/post/live_auction?num1={{s.id}}&inc=yes");
+}
+
+function myFunction2() {
+  location.replace("/post/live_auction?num1={{s.id}}&inc=no");
+}
+</script>
+
+ 
+        
+{% endblock %}

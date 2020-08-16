@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your  Players</h1><br>
+
+<h3 style="color:blue;">Batsman</h3>
+ <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Role</th>
+        <th>BasePrice</th>
+        <th>Status</th>
+        <th>SellPrice</th>
+        <th>Sell TeamName</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in s1 %}
+      <tr>
+        <td>{{p.player_name}}</td>
+        <td>{{p.player_country}}</td>
+        <td>{{p.player_role}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.sell_teamName}}</td>
+
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+    <h3 style="color:blue;">Bowlers</h3>
+
+
+ <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Role</th>
+        <th>BasePrice</th>
+        <th>Status</th>
+        <th>SellPrice</th>
+        <th>Sell TeamName</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in s2 %}
+      <tr>
+        <td>{{p.player_name}}</td>
+        <td>{{p.player_country}}</td>
+        <td>{{p.player_role}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.sell_teamName}}</td>
+
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+  <h3 style="color:blue;">AllRounder</h3>
+  
+ <table class="table  table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Role</th>
+        <th>BasePrice</th>
+        <th>Status</th>
+        <th>SellPrice</th>
+        <th>Sell TeamName</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in s3 %}
+      <tr>
+        <td>{{p.player_name}}</td>
+        <td>{{p.player_country}}</td>
+        <td>{{p.player_role}}</td>
+        <td>{{p.base_price}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.sell_price}}</td>
+        <td>{{p.sell_teamName}}</td>
+
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+        
+{% endblock %}
